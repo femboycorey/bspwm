@@ -1,0 +1,5 @@
+#!/bin/sh
+
+bspc rule -a Screenkey manage=false
+bspc rule -a FLOAT state=floating
+bspc rule -a Zathura state=tiled

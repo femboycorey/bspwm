@@ -1,0 +1,134 @@
+ #
+ # |---------------|
+ # | bspwm hotkeys |
+ # |---------------|
+ #
+
+# quit/restart bspwm
+super + alt + {q,r}
+  bspc {quit,wm -r}
+
+# close and kill a window
+super + q
+	bspc node -{c,k}
+
+#
+# window states
+#
+
+# make window sticky
+super + ctrl + s
+  bspc node -g sticky
+
+# set the window state {tiled, floating, fullscreen}
+super + {t,shift + t,p,f}
+    bspc node -t '~{tiled,pseudo_tiled,floating,fullscreen}' || bspc node -t tiled
+
+#
+# focus/swap windows
+#
+
+# focus the window in a given direction
+super + {_,shift + } {h,j,k,l}
+  bspc node -{f,s} {west,south,north,east}
+
+# focus the next desktop
+super + bracket{left,right}
+  bspc desktop -f {prev,next}
+
+# send window to given desktop
+super + {_,shift + } {1-9,0}
+  bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect new direction
+#
+
+# preselect the direction of a window
+super + ctrl + {h,j,k,l}
+  bspc node -p {west,south,north,east}
+
+# preselect the ratio of a window
+super + ctrl + {1-9}
+  bspc node -o 0.{1-9}
+
+# cancel the preselection
+super + ctrl + space
+  bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize windows
+#
+
+# resize windows
+super + alt + {h,j,k,l}
+    {bspc node @parent/second -z left -20 0; \
+    bspc node @parent/first -z right -20 0, \
+    bspc node @parent/second -z top 0 +20; \
+    bspc node @parent/first -z bottom 0 +20, \
+    bspc node @parent/first -z bottom 0 -20; \
+    bspc node @parent/second -z top 0 -20, \
+    bspc node @parent/first -z right +20 0; \
+    bspc node @parent/second -z left +20 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-50 0,0 50,0 -50,50 0}
+
+ # 
+ # |--------------|
+ # | user hotkeys |
+ # |--------------|
+ # 
+
+# launch a terminal emulator
+super + Return
+  st
+
+# launch the program runner
+super + d
+  dmenu_run -p ">"
+
+# opens a browser
+super + w
+  firefox
+
+# graphical file manager
+super + e
+  pcmanfm
+
+# open spotify
+super + s
+  LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify
+
+# opens a floating terminal running the R interactive shell
+super + r
+  st -c FLOAT -e R -q
+
+# opens a floating terminal running pulsemixer
+super + a
+  st -c FLOAT -e pulsemixer
+
+# opens a floating terminal
+super + shift + Return
+  st -c FLOAT
+
+# select a wallpaper
+super + F9
+  nsxiv -rot ~/pix/wallpapers/wallpapers/* | xargs xwallpaper --zoom
+
+# launch xmenu when user right clicks on desktop
+~button3used.!occ
+	bspc query -D -d 'focused.!occupied' && \{ \
+	    sh $HOME/.local/src/xmenu/xmenu.sh; \
+	    break; \
+	\}
+
+# opens notes in a floating terminal, in vim
+super + n
+  st -c FLOAT -e notetaker
+
+# opens global notes in a floating terminal, in vim
+super + shift + n
+  st -c FLOAT -e noteglobal
+

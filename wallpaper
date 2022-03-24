@@ -1,0 +1,5 @@
+#!/bin/sh
+
+wallpaper=$(ls $HOME/pix/wallpapers/wallpapers/* | shuf -n 1)
+xwallpaper --zoom $wallpaper
+cp $wallpaper $HOME/pix/wallpapers/wallpaper.png

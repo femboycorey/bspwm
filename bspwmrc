@@ -1,0 +1,8 @@
+#!/bin/sh
+
+sh $HOME/.config/bspwm/autostart &
+sh $HOME/.config/bspwm/bspwmsettings &
+sh $HOME/.config/bspwm/monitors &
+sh $HOME/.config/bspwm/rules &
+sh $HOME/.config/bspwm/settings &
+sh $HOME/.config/bspwm/wallpaper &

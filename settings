@@ -1,0 +1,15 @@
+#!/bin/sh
+
+xrandr --output eDP-1 --primary --mode 1920x1080 --rotate normal --output HDMI-1 --mode 1366x768 --rotate normal --right-of eDP-1 &
+
+brightnessctl set 100%
+
+setxkbmap -option caps:escape
+setxkbmap -layout gb
+
+xset r rate 275 50 &
+xsetroot -cursor_name left_ptr
+
+xset -dpms
+xset s noblank
+xset s off

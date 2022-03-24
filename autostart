@@ -1,0 +1,21 @@
+#!/bin/sh
+
+polybar_launch="$HOME/.config/polybar/launch.sh"
+sxhkd_config="$HOME/.config/bspwm/sxhkd/sxhkdrc"
+
+killall "polybar"
+sh $polybar_launch
+
+killall "sxhkd"
+sxhkd -c $sxhkd_config &
+
+killall "dunst"
+dunst &
+
+killall "flameshot"
+flameshot &
+
+killall "dropbox"
+dropbox &
+
+picom --experimental-backends
